@@ -42,17 +42,19 @@ class User(Admin):
     def __init__(
         self,
         server_addr: str = None,
+        server_addr_ext: str = None,
         server_port: int = 443,
         access_token: str = None,
         server_protocol: str = None,
         suppress_exception: bool = False
     ):
         super().__init__(
-            server_addr,
-            server_port,
-            access_token,
-            server_protocol,
-            suppress_exception
+            server_addr=server_addr,
+            server_addr_ext=server_addr_ext,
+            server_port=server_port,
+            access_token=access_token,
+            server_protocol=server_protocol,
+            suppress_exception=suppress_exception
         )
         self.devices = _Device(
             self.server_addr,

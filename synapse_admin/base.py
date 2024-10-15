@@ -168,6 +168,7 @@ class Admin():
     def __init__(
         self,
         server_addr: str = None,
+        server_addr_ext: str = None,
         server_port: int = 443,
         access_token: str = None,
         server_protocol: str = None,
@@ -176,6 +177,7 @@ class Admin():
         """
         Args:
             server_addr (str, optional): homeserver address. Defaults to None.
+            server_addr_ext (str, optional): homeserver external address. Defaults to None.
             server_port (int, optional): homeserver listening port. Defaults to 443.
             access_token (str, optional): access token that has admin power. Defaults to None.
             server_protocol (str, optional): "http://" or "https://". Defaults to None.
@@ -184,6 +186,7 @@ class Admin():
         if server_addr is not None and access_token is not None:
             self.access_token = access_token
             self.server_addr = server_addr
+            self.server_addr_ext = server_addr_ext
             self.server_port = server_port
             if server_protocol is None:
                 self.server_protocol = \
@@ -501,7 +504,7 @@ class Admin():
         Returns:
             str: ID with validated homeserver address part
         """
-        if f":{self.server_addr}" not in string:
+        if (f":{self.server_addr}" not in string) and (f":{self.server_addr_ext}" not in string):
             string = string + f":{self.server_addr}"
         return string
 
